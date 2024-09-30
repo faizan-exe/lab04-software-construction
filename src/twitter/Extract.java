@@ -12,7 +12,7 @@ import java.util.HashSet;
 import java.util.regex.Pattern;
 
 /**
- * Extract consists of methods that extract information from a list of tweets.
+ * Extract consists of methods that extract information from a liSst of tweets.
  * 
  * DO NOT change the method signatures and specifications of these methods, but
  * you should implement their method bodies, and you may add new public or

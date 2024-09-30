@@ -4,6 +4,8 @@
 package twitter;
 
 import java.util.List;
+import java.util.ArrayList;
+import java.time.Instant;
 
 /**
  * Filter consists of methods that filter a list of tweets for those matching a
@@ -27,7 +29,15 @@ public class Filter {
      *         in the same order as in the input list.
      */
     public static List<Tweet> writtenBy(List<Tweet> tweets, String username) {
-        throw new RuntimeException("not implemented");
+        List<Tweet> tweetsFilteredByUsername = new ArrayList<>();
+        
+    	for (Tweet tweet:tweets) {
+    		//compare and ignore case of username to tweet author
+        	if (tweet.getAuthor().equalsIgnoreCase(username)) {
+        		tweetsFilteredByUsername.add(tweet);
+        	}
+        }
+    	return tweetsFilteredByUsername;
     }
 
     /**
@@ -41,7 +51,15 @@ public class Filter {
      *         in the same order as in the input list.
      */
     public static List<Tweet> inTimespan(List<Tweet> tweets, Timespan timespan) {
-        throw new RuntimeException("not implemented");
+        List<Tweet> tweetsFilteredByTimespan = new ArrayList<>();
+    	
+    	for (Tweet tweet:tweets) {
+        	//Instant tweetTimestamp = tweet.getTimestamp();
+        	if ((tweet.getTimestamp().equals(timespan.getStart()) || tweet.getTimestamp().isAfter(timespan.getStart())) && (tweet.getTimestamp().equals(timespan.getEnd()) || tweet.getTimestamp().isBefore(timespan.getEnd()))) {
+        		tweetsFilteredByTimespan.add(tweet);
+        	}
+        }
+    	return tweetsFilteredByTimespan;
     }
 
     /**
@@ -60,7 +78,16 @@ public class Filter {
      *         same order as in the input list.
      */
     public static List<Tweet> containing(List<Tweet> tweets, List<String> words) {
-        throw new RuntimeException("not implemented");
+        List<Tweet> tweetsFilteredByWords = new ArrayList<>();
+    	for (Tweet tweet:tweets) {
+    		String text = tweet.getText();
+        	for (String word:words) {
+        		if (text.toLowerCase().contains(word.toLowerCase()) && !tweetsFilteredByWords.contains(tweet)) {
+        			tweetsFilteredByWords.add(tweet);
+        		}
+        	}
+        }
+    	return tweetsFilteredByWords;
     }
 
 }
